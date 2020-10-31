@@ -1,4 +1,4 @@
-package trasportoRifiuti.db;
+package it.polito.tdp.trasportoRifiuti.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,4 +37,5 @@ public class DBConnect {
 		}
 	}
 }
+
 

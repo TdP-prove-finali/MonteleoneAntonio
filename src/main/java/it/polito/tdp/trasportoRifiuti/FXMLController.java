@@ -3,14 +3,13 @@ package it.polito.tdp.trasportoRifiuti;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+import it.polito.tdp.trasportoRifiuti.model.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import trasportoRifiuti.model.Model;
 
 public class FXMLController {
 	

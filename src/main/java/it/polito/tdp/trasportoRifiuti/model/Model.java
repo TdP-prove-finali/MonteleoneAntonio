@@ -1,6 +1,6 @@
-package trasportoRifiuti.model;
+package it.polito.tdp.trasportoRifiuti.model;
 
-import trasportoRifiuti.db.trasportoRifiutiDAO;
+import it.polito.tdp.trasportoRifiuti.dao.trasportoRifiutiDAO;
 
 public class Model {
 	//esempio
