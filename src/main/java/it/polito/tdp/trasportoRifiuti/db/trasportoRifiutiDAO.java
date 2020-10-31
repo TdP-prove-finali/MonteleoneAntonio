@@ -1,4 +1,4 @@
-package it.polito.tdp.trasportoRifiuti.dao;
+package it.polito.tdp.trasportoRifiuti.db;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
