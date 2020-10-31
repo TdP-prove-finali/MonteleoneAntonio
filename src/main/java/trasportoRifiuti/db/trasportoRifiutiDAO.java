@@ -10,6 +10,7 @@ import java.util.List;
 
 public class trasportoRifiutiDAO {
 
+	//esempio
 	public void listDescrizioni(){
 		String sql = "SELECT distinct Descrizione_Europea1 " + 
 				"FROM registro_rifiuti";
