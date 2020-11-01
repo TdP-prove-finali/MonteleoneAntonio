@@ -10,66 +10,123 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 
 public class FXMLController {
 	
 	private Model model;
 
-    @FXML // ResourceBundle that was given to the FXMLLoader
+    @FXML
     private ResourceBundle resources;
 
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
+    @FXML
     private URL location;
 
-    @FXML // fx:id="btnCreaGrafo"
-    private Button btnCreaGrafo; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnClassifica"
-    private Button btnClassifica; // Value injected by FXMLLoader
-
-    @FXML // fx:id="btnSimula"
-    private Button btnSimula; // Value injected by FXMLLoader
-
-    @FXML // fx:id="cmbSquadra"
-    private ComboBox<?> cmbSquadra; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtN"
-    private TextField txtN; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtX"
-    private TextField txtX; // Value injected by FXMLLoader
-
-    @FXML // fx:id="txtResult"
-    private TextArea txtResult; // Value injected by FXMLLoader
+    @FXML
+    private ComboBox<?> cmbRagione;
 
     @FXML
-    void doClassifica(ActionEvent event) {
+    private ComboBox<?> cmbMeseInizio;
+
+    @FXML
+    private ComboBox<?> cmbMeseFine;
+
+    @FXML
+    private Button btnCerca;
+
+    @FXML
+    private ToggleGroup ragioneSociale;
+
+    @FXML
+    private ComboBox<?> cmbDescrizione;
+
+    @FXML
+    private ComboBox<?> cmbTrasportatore;
+
+    @FXML
+    private TextField txtQta;
+
+    @FXML
+    private TextField txtCapienza;
+
+    @FXML
+    private Button btnAggiungi;
+
+    @FXML
+    private Button btnResetta;
+
+    @FXML
+    private TextField txtProbabilita;
+
+    @FXML
+    private TextField txtPercentuale;
+
+    @FXML
+    private TextField txtMaxSpostamenti;
+
+    @FXML
+    private Button btnAvviaSimulazione;
+
+    @FXML
+    private Button btnPulisci;
+
+    @FXML
+    private TextArea txtRisultati;
+
+    @FXML
+    void doInserimento(ActionEvent event) {
 
     }
 
     @FXML
-    void doCreaGrafo(ActionEvent event) {
-    	this.model.verifica();
+    void doPulizia(ActionEvent event) {
 
     }
 
     @FXML
-    void doSimula(ActionEvent event) {
+    void doReset(ActionEvent event) {
 
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+    void doRicerca(ActionEvent event) {
+
+    }
+
+    @FXML
+    void doSimulazione(ActionEvent event) {
+
+    }
+
+    @FXML
+    void i(ActionEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
-        assert btnCreaGrafo != null : "fx:id=\"btnCreaGrafo\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnClassifica != null : "fx:id=\"btnClassifica\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert btnSimula != null : "fx:id=\"btnSimula\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert cmbSquadra != null : "fx:id=\"cmbSquadra\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtN != null : "fx:id=\"txtN\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtX != null : "fx:id=\"txtX\" was not injected: check your FXML file 'Scene.fxml'.";
-        assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert cmbRagione != null : "fx:id=\"cmbRagione\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert cmbMeseInizio != null : "fx:id=\"cmbMeseInizio\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert cmbMeseFine != null : "fx:id=\"cmbMeseFine\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnCerca != null : "fx:id=\"btnCerca\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert ragioneSociale != null : "fx:id=\"ragioneSociale\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert cmbDescrizione != null : "fx:id=\"cmbDescrizione\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert cmbTrasportatore != null : "fx:id=\"cmbTrasportatore\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtQta != null : "fx:id=\"txtQta\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtCapienza != null : "fx:id=\"txtCapienza\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnAggiungi != null : "fx:id=\"btnAggiungi\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnResetta != null : "fx:id=\"btnResetta\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtProbabilita != null : "fx:id=\"txtProbabilita\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtPercentuale != null : "fx:id=\"txtPercentuale\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtMaxSpostamenti != null : "fx:id=\"txtMaxSpostamenti\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnAvviaSimulazione != null : "fx:id=\"btnAvviaSimulazione\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnPulisci != null : "fx:id=\"btnPulisci\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert txtRisultati != null : "fx:id=\"txtRisultati\" was not injected: check your FXML file 'Scene.fxml'.";
+
     }
     
     public void setModel(Model model) {
     	this.model = model;
     }
 }
+

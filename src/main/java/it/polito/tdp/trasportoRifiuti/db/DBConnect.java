@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import it.polito.tdp.trasportoRifiuti.model.Model;
+
 public class DBConnect {
 
 	private static final String jdbcURL = "jdbc:mysql://localhost/amiu_db";
@@ -38,4 +40,7 @@ public class DBConnect {
 	}
 }
 
-
+//private Model model;
+/* public void setModel(Model model) {
+this.model = model;
+}*/

@@ -4,77 +4,241 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="620.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.trasportoRifiuti.FXMLController">
+<BorderPane minHeight="500.0" minWidth="600.0" prefHeight="670.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.trasportoRifiuti.FXMLController">
    <top>
-      <Label text="Esame 14/07/2020 PremierLeague" BorderPane.alignment="CENTER">
+      <Label text="Previsione per gestione mezzi di trasporto rifiuti" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" />
          </BorderPane.margin>
       </Label>
    </top>
    <center>
-      <VBox prefHeight="605.0" prefWidth="428.0" BorderPane.alignment="CENTER">
+      <VBox BorderPane.alignment="CENTER">
          <children>
-            <GridPane prefHeight="150.0" prefWidth="300.0">
+            <Separator prefWidth="200.0" />
+            <GridPane prefHeight="120.0" prefWidth="700.0">
               <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="132.0" minWidth="10.0" prefWidth="104.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="175.0" />
-                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="166.0" minWidth="10.0" prefWidth="149.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnCreaGrafo" mnemonicParsing="false" onAction="#doCreaGrafo" prefWidth="200.0" text="Crea Grafo" GridPane.columnIndex="2">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button fx:id="btnClassifica" mnemonicParsing="false" onAction="#doClassifica" prefWidth="200.0" text="Classifica Squadra" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Button fx:id="btnSimula" mnemonicParsing="false" onAction="#doSimula" prefWidth="200.0" text="Collegamento" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets right="5.0" />
-                     </GridPane.margin>
-                  </Button>
-                  <Label text="N" GridPane.rowIndex="3">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
+                  <Label text="EFFETTUA  RICERCA" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
                   </Label>
-                  <Label text="Squadra (s)" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Soglia critica (X)" GridPane.rowIndex="4">
-                     <GridPane.margin>
-                        <Insets right="10.0" />
-                     </GridPane.margin>
-                  </Label>
-                  <ComboBox fx:id="cmbSquadra" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField fx:id="txtN" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="txtX" maxWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                        <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="seleziona ragione sociale" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmbRagione" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Label text="seleziona periodo" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmbMeseInizio" prefWidth="150.0" promptText="mese di inizio" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cmbMeseFine" prefWidth="150.0" promptText="mese di fine" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Button fx:id="btnCerca" mnemonicParsing="false" onAction="#doRicerca" text="CERCA" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <RadioButton mnemonicParsing="false" text="SMALTITORE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="ragioneSociale" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton mnemonicParsing="false" onAction="#i" selected="true" text="PRODUTTORE" toggleGroup="$ragioneSociale" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </GridPane>
-            <TextArea fx:id="txtResult" prefHeight="436.0" prefWidth="428.0">
+            <Separator prefWidth="200.0" />
+            <GridPane prefHeight="350.0" prefWidth="700.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="GESTIONE SIMULAZIONE" GridPane.halignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <GridPane GridPane.rowIndex="1">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="350.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="350.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="seleziona Descrizione Europea1" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmbDescrizione" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                     </children>
+                  </GridPane>
+                  <Label text="Inserisci i mezzi di trasporto per ogni ragione sociale Trasportatore. Seleziona una ragione sociale Trasportatore, digita la relativa quantità e capienza. Per confermare premi il pulsante AGGIUNGI. Se desideri cambiare i dati inseriti seleziona una ragione sociale Trasportatore e premi il pulsante RESETTA successivamente ripeti il procedimento." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <GridPane GridPane.rowIndex="3">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="350.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="350.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="seleziona ragione sociale Trasportatore" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cmbTrasportatore" prefWidth="150.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="4">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="183.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="capienza in Kg" GridPane.columnIndex="2" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label text="quantità" GridPane.halignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtQta" alignment="CENTER_RIGHT" prefWidth="80.0" promptText="es. 3" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <TextField fx:id="txtCapienza" alignment="CENTER_RIGHT" prefWidth="80.0" promptText="es.  1000" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+                        <Button fx:id="btnAggiungi" mnemonicParsing="false" onAction="#doInserimento" text="AGGIUNGI" GridPane.columnIndex="4" GridPane.halignment="RIGHT" />
+                        <Button fx:id="btnResetta" mnemonicParsing="false" onAction="#doReset" text="RESETTA" GridPane.columnIndex="5" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="5">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Inserire una probabilità (numero intero da 0  a 100) affinchè i Kg di rifiuti prodotti possano variare ed una percentuale massima di variazione (numero intero maggiore o uguale a 1). Inserire inoltre un numero massimo di viaggi al giorno consentito per i mezzi." textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="11.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
+                  <GridPane prefWidth="712.0" GridPane.rowIndex="6">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                      <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                        <ColumnConstraints fillWidth="false" halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="probabilità" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtProbabilita" alignment="CENTER_RIGHT" prefWidth="80.0" promptText="es. 30" GridPane.columnIndex="1" GridPane.halignment="LEFT" />
+                        <Label text="percentuale" GridPane.columnIndex="2" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtPercentuale" alignment="CENTER_RIGHT" prefWidth="80.0" promptText="es. 40" GridPane.columnIndex="3" GridPane.halignment="LEFT" />
+                        <Label text="max spostamenti " GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtMaxSpostamenti" prefWidth="80.0" promptText="es. 2" GridPane.columnIndex="5" GridPane.halignment="LEFT" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="7">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="233.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="234.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="233.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints valignment="CENTER" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="btnAvviaSimulazione" mnemonicParsing="false" onAction="#doSimulazione" text="AVVIA SIMULAZIONE" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <Button fx:id="btnPulisci" mnemonicParsing="false" onAction="#doPulizia" text="PULISCI" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+            <Separator prefWidth="200.0" />
+            <TextArea fx:id="txtRisultati" editable="false">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </TextArea>
          </children>
