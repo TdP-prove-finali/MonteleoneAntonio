@@ -60,7 +60,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cmbRagione" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="cmbRagioneSociale" prefWidth="150.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                         <Label text="seleziona periodo" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -74,7 +74,7 @@
                               <ToggleGroup fx:id="ragioneSociale" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" onAction="#i" selected="true" text="PRODUTTORE" toggleGroup="$ragioneSociale" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <RadioButton mnemonicParsing="false" selected="true" text="PRODUTTORE" toggleGroup="$ragioneSociale" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

@@ -13,9 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class FXMLController {
-	
-	private Model model;
 
+	private Model model;
+	
     @FXML
     private ResourceBundle resources;
 
@@ -23,7 +23,7 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ComboBox<?> cmbRagione;
+    private ComboBox<?> cmbRagioneSociale;
 
     @FXML
     private ComboBox<?> cmbMeseInizio;
@@ -90,6 +90,7 @@ public class FXMLController {
 
     @FXML
     void doRicerca(ActionEvent event) {
+    	this.model.verifica();
 
     }
 
@@ -99,13 +100,8 @@ public class FXMLController {
     }
 
     @FXML
-    void i(ActionEvent event) {
-
-    }
-
-    @FXML
     void initialize() {
-        assert cmbRagione != null : "fx:id=\"cmbRagione\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert cmbRagioneSociale != null : "fx:id=\"cmbRagioneSociale\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbMeseInizio != null : "fx:id=\"cmbMeseInizio\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbMeseFine != null : "fx:id=\"cmbMeseFine\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnCerca != null : "fx:id=\"btnCerca\" was not injected: check your FXML file 'Scene.fxml'.";
@@ -129,4 +125,3 @@ public class FXMLController {
     	this.model = model;
     }
 }
-
