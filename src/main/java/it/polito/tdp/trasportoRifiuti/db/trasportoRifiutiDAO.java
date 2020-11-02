@@ -111,10 +111,10 @@ public class trasportoRifiutiDAO {
 	}
 	
 
-	//esempio
-	public void listDescrizioni(){
+	public List<String> listAllDescrizioni(){
 		String sql = "SELECT distinct Descrizione_Europea1 " + 
-				"FROM registro_rifiuti";
+				"FROM registro_rifiuti " + 
+				"ORDER BY Descrizione_Europea1 ";
 		List<String> result = new ArrayList<String>();
 		Connection conn = DBConnect.getConnection();
 
@@ -122,16 +122,39 @@ public class trasportoRifiutiDAO {
 			PreparedStatement st = conn.prepareStatement(sql);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
-				
-				//result.add(res.getString("Descrizione_Europea1"));
-				System.out.println(res.getString("Descrizione_Europea1"));
+				result.add(res.getString("Descrizione_Europea1"));
 			}
 			conn.close();
-			//return result;
+			return result;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			//return null;
+			return null;
+		}
+	}
+	
+	public List<String> listAllTrasportatori(String descrizione){
+		String sql = "SELECT DISTINCT Ragione_Sociale_Trasportatore " + 
+				"FROM registro_rifiuti " + 
+				"WHERE Descrizione_Europea1 = ? " + 
+				"ORDER BY Ragione_Sociale_Trasportatore ";
+		
+		List<String> result = new ArrayList<String>();
+		Connection conn = DBConnect.getConnection();
+
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, descrizione);
+			ResultSet res = st.executeQuery();
+			while (res.next()) {
+				result.add(res.getString("Ragione_Sociale_Trasportatore"));
+			}
+			conn.close();
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	

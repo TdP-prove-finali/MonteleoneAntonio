@@ -114,7 +114,7 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <ComboBox fx:id="cmbDescrizione" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                        <ComboBox fx:id="cmbDescrizione" onAction="#associaTrasportatori" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                      </children>
                   </GridPane>
                   <Label text="Inserisci i mezzi di trasporto per ogni ragione sociale Trasportatore. Seleziona una ragione sociale Trasportatore, digita la relativa quantità e capienza. Per confermare premi il pulsante AGGIUNGI. Se desideri cambiare i dati inseriti seleziona una ragione sociale Trasportatore e premi il pulsante RESETTA successivamente ripeti il procedimento." textAlignment="CENTER" wrapText="true" GridPane.halignment="CENTER" GridPane.rowIndex="2">
