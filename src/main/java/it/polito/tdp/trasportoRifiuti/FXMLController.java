@@ -1,6 +1,7 @@
 package it.polito.tdp.trasportoRifiuti;
 
 import java.net.URL;
+import java.time.Month;
 import java.util.ResourceBundle;
 
 import it.polito.tdp.trasportoRifiuti.model.Model;
@@ -8,14 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 public class FXMLController {
-
-	private Model model;
 	
+	private Model model;
+
     @FXML
     private ResourceBundle resources;
 
@@ -23,19 +25,25 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ComboBox<?> cmbRagioneSociale;
+    private ComboBox<String> cmbRagioneSociale;
 
     @FXML
-    private ComboBox<?> cmbMeseInizio;
+    private ComboBox<Month> cmbMeseInizio;
 
     @FXML
-    private ComboBox<?> cmbMeseFine;
+    private ComboBox<Month> cmbMeseFine;
 
     @FXML
     private Button btnCerca;
 
     @FXML
+    private RadioButton rbtnSmaltitore;
+
+    @FXML
     private ToggleGroup ragioneSociale;
+
+    @FXML
+    private RadioButton rbtnProduttore;
 
     @FXML
     private ComboBox<?> cmbDescrizione;
@@ -74,6 +82,18 @@ public class FXMLController {
     private TextArea txtRisultati;
 
     @FXML
+    void associaProduttori(ActionEvent event) {
+    	this.cmbRagioneSociale.getItems().clear();
+    	this.cmbRagioneSociale.getItems().setAll(this.model.getProduttori());
+    }
+
+    @FXML
+    void associaSmaltitori(ActionEvent event) {
+    	this.cmbRagioneSociale.getItems().clear();
+    	this.cmbRagioneSociale.getItems().setAll(this.model.getSmaltitori());
+    }
+
+    @FXML
     void doInserimento(ActionEvent event) {
 
     }
@@ -90,7 +110,49 @@ public class FXMLController {
 
     @FXML
     void doRicerca(ActionEvent event) {
-    	this.model.verifica();
+    	String ragioneSoc = this.cmbRagioneSociale.getValue();
+    	
+    	if(ragioneSoc==null) {
+    		this.txtRisultati.setText("Impossibile effettuare la ricerca\ndevi prima selezionare una ragioneSociale");
+    		return;
+    	}
+    	
+    	Month meseI = this.cmbMeseInizio.getValue();
+    	Month meseF = this.cmbMeseFine.getValue();
+    	
+    	if(meseI==null) {
+    		this.txtRisultati.setText("Impossibile effettuare la ricerca\ndevi prima selezionare un mese iniziale");
+    		return;
+    	}
+    	
+    	if(meseF==null) {
+    		this.txtRisultati.setText("Impossibile effettuare la ricerca\ndevi prima selezionare un mese finale");
+    		return;
+    	}
+    	
+    	int meseIniziale = meseI.getValue();
+    	int meseFinale = meseF.getValue();
+    	
+    	if(meseFinale<meseIniziale) {
+    		this.txtRisultati.setText("Impossibile effettuare la ricerca\nil mese finale deve essere uguale o successivo al mese iniziale");
+    		return;
+    	}
+    	
+    	RadioButton radioRagioneSociale = (RadioButton) this.ragioneSociale.getSelectedToggle();
+    	String sceltaRagioneSociale = radioRagioneSociale.getText();
+    	
+    	String testo = "";
+    	
+    	if(sceltaRagioneSociale.equals(this.rbtnProduttore.getText())) {
+    		testo = this.model.getRicercaProduttori(ragioneSoc, meseIniziale, meseFinale);
+    	}else if(sceltaRagioneSociale.equals(this.rbtnSmaltitore.getText())){
+    		testo = this.model.getRicercaSmaltitori(ragioneSoc, meseIniziale, meseFinale);
+    	}else {
+    		this.txtRisultati.setText("Impossibile effettuare la ricerca\nsi è verificato un errore sconosciuto\nprovare a ripetere la procedura");
+    		return;
+    	}
+    	
+    	this.txtRisultati.setText(testo);
 
     }
 
@@ -105,7 +167,9 @@ public class FXMLController {
         assert cmbMeseInizio != null : "fx:id=\"cmbMeseInizio\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbMeseFine != null : "fx:id=\"cmbMeseFine\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnCerca != null : "fx:id=\"btnCerca\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert rbtnSmaltitore != null : "fx:id=\"rbtnSmaltitore\" was not injected: check your FXML file 'Scene.fxml'.";
         assert ragioneSociale != null : "fx:id=\"ragioneSociale\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert rbtnProduttore != null : "fx:id=\"rbtnProduttore\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbDescrizione != null : "fx:id=\"cmbDescrizione\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbTrasportatore != null : "fx:id=\"cmbTrasportatore\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtQta != null : "fx:id=\"txtQta\" was not injected: check your FXML file 'Scene.fxml'.";
@@ -123,5 +187,10 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	this.cmbRagioneSociale.getItems().setAll(this.model.getProduttori());
+    	for(int i = 1; i<=12; i++) {
+    	    this.cmbMeseInizio.getItems().add(Month.of(i));
+    	    this.cmbMeseFine.getItems().add(Month.of(i));
+    	}
     }
 }

@@ -69,12 +69,12 @@
                         <ComboBox fx:id="cmbMeseInizio" prefWidth="150.0" promptText="mese di inizio" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <ComboBox fx:id="cmbMeseFine" prefWidth="150.0" promptText="mese di fine" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                         <Button fx:id="btnCerca" mnemonicParsing="false" onAction="#doRicerca" text="CERCA" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                        <RadioButton mnemonicParsing="false" text="SMALTITORE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <RadioButton fx:id="rbtnSmaltitore" mnemonicParsing="false" onAction="#associaSmaltitori" text="SMALTITORE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                            <toggleGroup>
                               <ToggleGroup fx:id="ragioneSociale" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" selected="true" text="PRODUTTORE" toggleGroup="$ragioneSociale" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <RadioButton fx:id="rbtnProduttore" mnemonicParsing="false" onAction="#associaProduttori" selected="true" text="PRODUTTORE" toggleGroup="$ragioneSociale" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -240,6 +240,9 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <font>
+                  <Font name="Courier New" size="12.0" />
+               </font>
             </TextArea>
          </children>
       </VBox>
