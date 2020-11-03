@@ -110,7 +110,11 @@ public class Event implements Comparable<Event>{
 	@Override
 	public int compareTo(Event o) {
 		if(this.data.equals(o.data)) {
-			return -(this.peso-o.peso);
+			if(this.ragSocTrasp.equals(o.ragSocTrasp)) {
+				return -(this.peso-o.peso);
+			}else {
+				return this.ragSocTrasp.compareTo(o.ragSocTrasp);
+				}
 		}else {
 			return this.data.compareTo(o.data);
 		}

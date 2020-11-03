@@ -27,6 +27,8 @@ public class Simulator {
 	
 	//STATO DEL SISTEMA
 	
+	private String trasportatorePrecedente;
+	private Map<MezzoDiTrasporto,Integer> mezziDisponibili;
 	
 	//VALORI DA CALCOLARE
 	
@@ -71,14 +73,22 @@ public class Simulator {
 		
 		for(Registrazione r: registrazioni) {
 			int peso = modificaPeso(r.getPeso());
-			Event e = new Event (EventType.NUOVA_REGISTRAZIONE,r.getData(),r.getRagSocTrasp(),r.getZonaRaccolta(),r.getPeso());
+			Event e = new Event (EventType.NUOVA_REGISTRAZIONE,r.getData(),r.getRagSocTrasp(),r.getZonaRaccolta(),peso);
 			this.queue.add(e);
+		}
+		
+		this.mezziDisponibili = new TreeMap<>();
+		
+		for(MezzoDiTrasporto m: this.mezzi) {
+			this.mezziDisponibili.put(m, 0);
 		}
 		
 		LocalDate giorno = LocalDate.of(2019, 1, 1);
 		
+		this.trasportatorePrecedente="ZZZZZZ";
+		
 		while(giorno.getYear()<2020) {
-			Event ev = new Event(EventType.FINE_GIORNATA,giorno,null,null,0);
+			Event ev = new Event(EventType.FINE_GIORNATA,giorno,"ZZZZZZ",null,0);
 			this.queue.add(ev);
 			giorno = giorno.plusDays(1);
 		}
@@ -93,11 +103,65 @@ public class Simulator {
 
 	private int modificaPeso(int peso) {
 		
-		return 0;
+		int nuovoPeso = peso;
+		
+		double n = Math.random()*100;
+		
+		if(n<this.probabilita) {
+			
+		double variazione = (this.percentuale*Math.random())/100;
+		
+		double segno = Math.random();
+		
+		if(segno<0.5) {
+			nuovoPeso = (int) (nuovoPeso-nuovoPeso*variazione);
+		}else {
+			nuovoPeso = (int) (nuovoPeso+nuovoPeso*variazione);
+		}
+			
+		}
+		
+		if(nuovoPeso<=0) {
+			return peso;
+		}
+		
+		return nuovoPeso;
 	}
 
 	private void processEvent(Event event) {
-		// TODO Auto-generated method stub
+		switch(event.getType()) {
+		
+		case NUOVA_REGISTRAZIONE:
+			
+			String trasportatore = event.getRagSocTrasp();
+			int rifiuti = event.getPeso();
+			boolean flag = true;
+			
+			for(int i = 0; i<this.maxSpostamenti; i++) {
+			for(MezzoDiTrasporto m: this.mezziDisponibili.keySet()) {
+				if(m.getTrasportatore().equals(trasportatore)) {
+				if(this.mezziDisponibili.get(m)==i && flag==true) {
+					int capienza = m.getCapienza();
+					if(capienza>=rifiuti) {
+						rifiuti = 0;
+						flag = false;
+					}else {
+						rifiuti = rifiuti-capienza;
+					}
+					this.mezziDisponibili.put(m, i+1);
+				}
+				}
+			}
+			}
+			
+			
+			
+			break;
+			
+		case FINE_GIORNATA:
+			
+			break;
+		}
 		
 	}
 
