@@ -1,6 +1,6 @@
 package it.polito.tdp.trasportoRifiuti.model;
 
-public class MezzoDiTrasporto {
+public class MezzoDiTrasporto implements Comparable<MezzoDiTrasporto>{
 	
 	private Integer id;
 	private String trasportatore;
@@ -71,6 +71,17 @@ public class MezzoDiTrasporto {
 	@Override
 	public String toString() {
 		return "MezzoDiTrasporto [id=" + id + ", trasportatore=" + trasportatore + ", capienza=" + capienza + "]";
+	}
+
+	@Override
+	public int compareTo(MezzoDiTrasporto o) {
+		
+		if(this.trasportatore.equals(o.trasportatore)) {
+			return this.id-o.id;
+		}else {
+			return this.trasportatore.compareTo(o.trasportatore);
+		}
+
 	}
 	
 	

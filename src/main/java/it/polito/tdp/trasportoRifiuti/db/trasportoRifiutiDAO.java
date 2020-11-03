@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polito.tdp.trasportoRifiuti.model.Registrazione;
+
 
 public class trasportoRifiutiDAO {
 	
@@ -148,6 +150,68 @@ public class trasportoRifiutiDAO {
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
 				result.add(res.getString("Ragione_Sociale_Trasportatore"));
+			}
+			conn.close();
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<Registrazione> listAllRegistrazioni(String descrizione){
+		String sql = "SELECT Data_Registrazione, Ragione_Sociale_Trasportatore, Zona_di_raccolta, SUM(Peso_Netto_Rifiuto_in_Kg) AS Peso " + 
+				"FROM registro_rifiuti " + 
+				"WHERE Descrizione_Europea1 = ? " + 
+				"GROUP BY Data_Registrazione, Ragione_Sociale_Trasportatore, Zona_di_raccolta " + 
+				"ORDER BY Data_Registrazione ";
+		
+		List<Registrazione> result = new ArrayList<>();
+		Connection conn = DBConnect.getConnection();
+
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, descrizione);
+			ResultSet res = st.executeQuery();
+			while (res.next()) {
+				String zona = res.getString("Zona_di_raccolta");
+				if(zona==null) {
+					zona = "ZONA NON DEFINITA";
+				}
+				Registrazione reg = new Registrazione(res.getDate("Data_Registrazione").toLocalDate(), res.getString("Ragione_Sociale_Trasportatore"), zona, res.getInt("Peso"));
+				//System.out.println(reg.toString()+"\n");
+				result.add(reg);
+				
+			}
+			conn.close();
+			return result;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public List<String> listAllZoneDiRaccolta(String descrizione){
+		String sql = "SELECT DISTINCT Zona_di_raccolta " + 
+				"FROM registro_rifiuti " + 
+				"WHERE Descrizione_Europea1 = ? " + 
+				"ORDER BY Zona_di_raccolta";
+		
+		List<String> result = new ArrayList<String>();
+		Connection conn = DBConnect.getConnection();
+
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, descrizione);
+			ResultSet res = st.executeQuery();
+			while (res.next()) {
+				String zona = res.getString("Zona_di_raccolta");
+				if(zona==null) {
+					zona = "ZONA NON DEFINITA";
+				}
+				result.add(zona);
 			}
 			conn.close();
 			return result;

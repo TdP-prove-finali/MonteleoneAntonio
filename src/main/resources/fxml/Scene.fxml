@@ -228,6 +228,7 @@
                      <children>
                         <Button fx:id="btnAvviaSimulazione" mnemonicParsing="false" onAction="#doSimulazione" text="AVVIA SIMULAZIONE" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                         <Button fx:id="btnPulisci" mnemonicParsing="false" onAction="#doPulizia" text="PULISCI" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
+                        <Button fx:id="btnVisualizza" mnemonicParsing="false" onAction="#visualizzaElenco" text="VISUALIZZA MEZZI AGGIUNTI" />
                      </children>
                   </GridPane>
                </children>

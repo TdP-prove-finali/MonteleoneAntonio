@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.trasportoRifiuti.model.MezzoDiTrasporto;
 import it.polito.tdp.trasportoRifiuti.model.Model;
+import it.polito.tdp.trasportoRifiuti.model.Registrazione;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -81,6 +82,9 @@ public class FXMLController {
 
     @FXML
     private Button btnPulisci;
+    
+    @FXML
+    private Button btnVisualizza;
 
     @FXML
     private TextArea txtRisultati;
@@ -248,11 +252,13 @@ public class FXMLController {
     @FXML
     void doSimulazione(ActionEvent event) {
     	
-    	this.txtRisultati.clear();
-    	for(MezzoDiTrasporto m: this.model.getMezzi()) {
-    		this.txtRisultati.appendText(m.toString()+"\n");
+    	String descrizione = this.cmbDescrizione.getValue();
+    	
+    	if(descrizione==null) {
+    		this.txtRisultati.setText("Impossibile effettuare la simulazione\ndevi prima selezionare una Descrizione Europea1");
+    		return;
     	}
-    
+    	
     	int probabilita;
     	
     	try {
@@ -264,7 +270,7 @@ public class FXMLController {
     	    return;
     	}
     	
-    	if(probabilita<=0 || probabilita>100) {
+    	if(probabilita<0 || probabilita>100) {
     		this.txtRisultati.setText("La probabilita inserita deve essere un numero intero compreso tra zero e cento");
      	    return;
     	}
@@ -301,9 +307,33 @@ public class FXMLController {
      	    return;
     	}
     	
-    	if(this.model.getMezzi().size()==0) {
-    		this.txtRisultati.setText("Impossibile effettuare la simulazione\nnon hai aggiunto nessun mezzo");
+    	if(this.model.verificaInserimento()==false) {
+    		this.txtRisultati.setText("Impossibile effettuare la simulazione\nnon hai aggiunto mezzi per ogni ragione sociale Trasportatore");
     		return;
+    	}
+    	
+    	this.model.simula(descrizione,probabilita,percentuale,max);
+
+    }
+    
+    @FXML
+    void visualizzaElenco(ActionEvent event) {
+    	
+    	String descrizione = this.cmbDescrizione.getValue();
+    	
+    	if(descrizione==null) {
+    		this.txtRisultati.setText("Non hai aggiunto nessun mezzo\ndevi prima selezionare una Descrizione Europea1");
+    		return;
+    	}
+    	
+    	if(this.model.getMezzi().size()==0) {
+    		this.txtRisultati.setText("Non hai aggiunto nessun mezzo per la Descrizione Europea1 selezionata");
+    		return;
+    	}
+    	
+    	this.txtRisultati.clear();
+    	for(MezzoDiTrasporto m: this.model.getMezzi()) {
+    		this.txtRisultati.appendText(m.toString()+"\n");
     	}
 
     }
@@ -328,6 +358,7 @@ public class FXMLController {
         assert txtMaxSpostamenti != null : "fx:id=\"txtMaxSpostamenti\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnAvviaSimulazione != null : "fx:id=\"btnAvviaSimulazione\" was not injected: check your FXML file 'Scene.fxml'.";
         assert btnPulisci != null : "fx:id=\"btnPulisci\" was not injected: check your FXML file 'Scene.fxml'.";
+        assert btnVisualizza != null : "fx:id=\"btnVisualizza\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtRisultati != null : "fx:id=\"txtRisultati\" was not injected: check your FXML file 'Scene.fxml'.";
 
     }

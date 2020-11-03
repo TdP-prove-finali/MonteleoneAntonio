@@ -13,6 +13,9 @@ public class Model {
 	private List<String> descrizioneEuropea1;
 	private List<String> ragioneSocialeTrasportatore;
 	private List<MezzoDiTrasporto> mezzi;
+	private List<Registrazione> registrazioni;
+	private List<String> zoneDiRaccolta;
+	private Simulator sim;
 	
 	public Model() {
 		this.dao = new trasportoRifiutiDAO();
@@ -82,6 +85,50 @@ public class Model {
 		}
 		
 		this.mezzi.removeAll(eliminati);
+		
+	}
+	
+	public boolean verificaInserimento() {
+		
+		boolean flag = false;
+		
+		for(String t: this.ragioneSocialeTrasportatore) {
+			for(MezzoDiTrasporto m: this.mezzi) {
+				if(m.getTrasportatore().equals(t)){
+					flag = true;
+				}
+			}
+			if(flag==false) {
+				return flag;
+			}else {
+				flag = false;
+			}
+		}
+		
+		return true;
+		
+	}
+	
+	/*public List<Registrazione> getRegistrazioni(String descrizione){
+		this.registrazioni = new ArrayList<>(this.dao.listAllRegistrazioni(descrizione));
+		return this.registrazioni; 
+	}*/
+	
+	/*public List<String> getZoneDiRaccolta(String descrizione){
+		this.zoneDiRaccolta = new ArrayList<>(this.dao.listAllZoneDiRaccolta(descrizione));
+		return this.zoneDiRaccolta;
+	}*/
+
+	public void simula(String descrizione, int probabilita, int percentuale, int max) {
+		
+		this.registrazioni = new ArrayList<>(this.dao.listAllRegistrazioni(descrizione));
+		
+		this.zoneDiRaccolta = new ArrayList<>(this.dao.listAllZoneDiRaccolta(descrizione));
+		
+		this.sim = new Simulator();
+		
+		this.sim.simula(this.registrazioni,this.zoneDiRaccolta,this.mezzi,probabilita,percentuale,max);
+		
 		
 	}
 	
