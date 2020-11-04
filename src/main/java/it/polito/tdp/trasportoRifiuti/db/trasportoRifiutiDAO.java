@@ -63,7 +63,7 @@ public class trasportoRifiutiDAO {
 				"AND Month(Data_Registrazione)>= ? AND Month(Data_Registrazione)<= ? " + 
 				"GROUP BY Descrizione_Europea1 ";
 		
-		String testo = String.format("%-60s %-25s", "Descrizione Europea1", "Media in Kg dei rifiuti");
+		String testo = String.format("%-60s %-25s", "DESCRIZIONE EUROPEA1", "MEDIA in Kg RIFIUTI");
 		Connection conn = DBConnect.getConnection();
 
 		try {
@@ -91,7 +91,7 @@ public class trasportoRifiutiDAO {
 				"AND Month(Data_Registrazione)>= ? AND Month(Data_Registrazione)<= ? " + 
 				"GROUP BY Descrizione_Europea1 ";
 		
-		String testo = String.format("%-60s %-25s", "Descrizione Europea1", "Media in Kg dei rifiuti");
+		String testo = String.format("%-60s %-25s", "DESCRIZIONE EUROPEA1", "MEDIA in Kg RIFIUTI");
 		Connection conn = DBConnect.getConnection();
 
 		try {

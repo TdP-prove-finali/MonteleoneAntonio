@@ -11,8 +11,7 @@ import it.polito.tdp.trasportoRifiuti.model.Event.EventType;
 
 public class Simulator {
 	
-	//PARAMETRI DI SIMULAZIONE
-	
+	//PARAMETRI DI SIMULAZIONE	
 	private int probabilita;
 	
 	private int percentuale;
@@ -22,32 +21,26 @@ public class Simulator {
 	private List<MezzoDiTrasporto> mezzi;
 	
 	//CODA DEGLI EVENTI
-	
 	private PriorityQueue<Event> queue;
 	
 	//STATO DEL SISTEMA
-	
-	private String trasportatorePrecedente;
 	private Map<MezzoDiTrasporto,Integer> mezziDisponibili;
 	
 	//VALORI DA CALCOLARE
-	
 	private Map<String,Integer> zone;
 	
 	private Map<MezzoDiTrasporto,Integer> inattivi;
 
 	//METODI PER RESTITUIRE I RISULTATI
-	
 	public Map<String, Integer> getZone() {
-		return zone;
+		return this.zone;
 	}
 
 	public Map<MezzoDiTrasporto, Integer> getInattivi() {
-		return inattivi;
+		return this.inattivi;
 	}
 	
 	//INIZIALIZZAZIONE
-
 	public void simula(List<Registrazione> registrazioni, List<String> zoneDiRaccolta, List<MezzoDiTrasporto> mezziTrasp,
 			int p, int perc, int max) {
 		
@@ -85,8 +78,6 @@ public class Simulator {
 		
 		LocalDate giorno = LocalDate.of(2019, 1, 1);
 		
-		this.trasportatorePrecedente="ZZZZZZ";
-		
 		while(giorno.getYear()<2020) {
 			Event ev = new Event(EventType.FINE_GIORNATA,giorno,"ZZZZZZ",null,0);
 			this.queue.add(ev);
@@ -95,7 +86,6 @@ public class Simulator {
 		
 		while(!this.queue.isEmpty()) {
 			Event event = this.queue.poll();
-			System.out.println(event.toString());
 			processEvent(event);
 		}
 		
@@ -127,7 +117,8 @@ public class Simulator {
 		
 		return nuovoPeso;
 	}
-
+	
+	//ESECUZIONE
 	private void processEvent(Event event) {
 		switch(event.getType()) {
 		
@@ -138,20 +129,26 @@ public class Simulator {
 			boolean flag = true;
 			
 			for(int i = 0; i<this.maxSpostamenti; i++) {
-			for(MezzoDiTrasporto m: this.mezziDisponibili.keySet()) {
-				if(m.getTrasportatore().equals(trasportatore)) {
-				if(this.mezziDisponibili.get(m)==i && flag==true) {
-					int capienza = m.getCapienza();
-					if(capienza>=rifiuti) {
-						rifiuti = 0;
-						flag = false;
-					}else {
-						rifiuti = rifiuti-capienza;
+				for(MezzoDiTrasporto m: this.mezzi) {
+					if(m.getTrasportatore().equals(trasportatore)) {
+						if(this.mezziDisponibili.get(m)==i && flag == true) {
+							int capienza = m.getCapienza();
+							if(capienza>=rifiuti) {
+								rifiuti = 0;
+								flag = false;
+							}else {
+								rifiuti = rifiuti-capienza;
+								}
+							this.mezziDisponibili.put(m, i+1);
+							}
+						}
 					}
-					this.mezziDisponibili.put(m, i+1);
 				}
-				}
-			}
+			
+			String zonaDiRaccolta = event.getZonaRaccolta();
+			
+			if(rifiuti>0) {
+				this.zone.put(zonaDiRaccolta, this.zone.get(zonaDiRaccolta)+rifiuti);
 			}
 			
 			
@@ -159,6 +156,16 @@ public class Simulator {
 			break;
 			
 		case FINE_GIORNATA:
+			
+			for(MezzoDiTrasporto m: this.mezziDisponibili.keySet()) {
+				if(this.mezziDisponibili.get(m)==0) {
+					this.inattivi.put(m, this.inattivi.get(m)+1);
+				}
+			}
+			
+			for(MezzoDiTrasporto m: this.mezzi) {
+				this.mezziDisponibili.put(m, 0);
+			}
 			
 			break;
 		}

@@ -2,6 +2,7 @@ package it.polito.tdp.trasportoRifiuti.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import it.polito.tdp.trasportoRifiuti.db.trasportoRifiutiDAO;
 
@@ -108,16 +109,6 @@ public class Model {
 		return true;
 		
 	}
-	
-	/*public List<Registrazione> getRegistrazioni(String descrizione){
-		this.registrazioni = new ArrayList<>(this.dao.listAllRegistrazioni(descrizione));
-		return this.registrazioni; 
-	}*/
-	
-	/*public List<String> getZoneDiRaccolta(String descrizione){
-		this.zoneDiRaccolta = new ArrayList<>(this.dao.listAllZoneDiRaccolta(descrizione));
-		return this.zoneDiRaccolta;
-	}*/
 
 	public void simula(String descrizione, int probabilita, int percentuale, int max) {
 		
@@ -129,7 +120,14 @@ public class Model {
 		
 		this.sim.simula(this.registrazioni,this.zoneDiRaccolta,this.mezzi,probabilita,percentuale,max);
 		
-		
+	}
+	
+	public Map<String,Integer> getZone(){
+		return this.sim.getZone();
+	}
+	
+	public Map<MezzoDiTrasporto,Integer> getInattivi(){
+		return this.sim.getInattivi();
 	}
 	
 }

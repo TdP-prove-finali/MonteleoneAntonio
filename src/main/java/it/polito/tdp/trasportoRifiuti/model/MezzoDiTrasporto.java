@@ -70,7 +70,7 @@ public class MezzoDiTrasporto implements Comparable<MezzoDiTrasporto>{
 
 	@Override
 	public String toString() {
-		return "MezzoDiTrasporto [id=" + id + ", trasportatore=" + trasportatore + ", capienza=" + capienza + "]";
+		return "[id=" + id + ", R.S.T=" + trasportatore + ", capienza=" + capienza + "]";
 	}
 
 	@Override

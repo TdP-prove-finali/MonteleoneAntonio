@@ -39,8 +39,3 @@ public class DBConnect {
 		}
 	}
 }
-
-//private Model model;
-/* public void setModel(Model model) {
-this.model = model;
-}*/

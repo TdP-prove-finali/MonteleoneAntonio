@@ -4,7 +4,9 @@ import java.net.URL;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import it.polito.tdp.trasportoRifiuti.model.MezzoDiTrasporto;
 import it.polito.tdp.trasportoRifiuti.model.Model;
@@ -312,7 +314,26 @@ public class FXMLController {
     		return;
     	}
     	
+    	this.txtRisultati.clear();
+    	
     	this.model.simula(descrizione,probabilita,percentuale,max);
+    	
+    	Map<String,Integer> zone = new TreeMap<>(this.model.getZone());
+    	
+    	this.txtRisultati.appendText(String.format("%-40s %-25s\n", "ZONA DI RACCOLTA", "RIFIUTI NON TRASPORTATI in Kg"));
+    	
+    	for(String z: zone.keySet()) {
+    		this.txtRisultati.appendText(String.format("%-40s %-25s\n", z,zone.get(z)));
+    	}
+    	
+    	this.txtRisultati.appendText(String.format("\n\n%-68s %-15s\n", "MEZZO DI TRASPORTO", "GIORNI DI INATTIVITA'"));
+    	
+    	Map<MezzoDiTrasporto,Integer> inattivi = new TreeMap<>(this.model.getInattivi());
+    	
+    	for(MezzoDiTrasporto m: inattivi.keySet()) {
+    		this.txtRisultati.appendText(String.format("%-68s %-15s\n", m,inattivi.get(m)));
+    	}
+    	
 
     }
     
@@ -333,7 +354,7 @@ public class FXMLController {
     	
     	this.txtRisultati.clear();
     	for(MezzoDiTrasporto m: this.model.getMezzi()) {
-    		this.txtRisultati.appendText(m.toString()+"\n");
+    		this.txtRisultati.appendText("Mezzo di trasporto "+m.toString()+"\n");
     	}
 
     }
