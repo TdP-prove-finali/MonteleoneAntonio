@@ -366,7 +366,7 @@ public class FXMLController {
 
     @FXML
     void initialize() {
-    	 assert BorderPane != null : "fx:id=\"BorderPane\" was not injected: check your FXML file 'Scene.fxml'.";
+    	assert BorderPane != null : "fx:id=\"BorderPane\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbRagioneSociale != null : "fx:id=\"cmbRagioneSociale\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbMeseInizio != null : "fx:id=\"cmbMeseInizio\" was not injected: check your FXML file 'Scene.fxml'.";
         assert cmbMeseFine != null : "fx:id=\"cmbMeseFine\" was not injected: check your FXML file 'Scene.fxml'.";
