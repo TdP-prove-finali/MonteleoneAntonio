@@ -1,3 +1,43 @@
+#BorderPane{
+    -fx-background-color: #343434;
+}
+
 .button {
-    -fx-font-weight: bold;
+    -fx-background-color:
+            red,
+            linear-gradient(#ff7b4e 50%, white 100%),
+            radial-gradient(center 50% -40%, radius 200%, #ff9f74 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 30;
+
+}
+
+.button:hover{
+    -fx-border-radius: 30;
+    -fx-border-color: red;
+}
+
+.button:pressed {
+    -fx-background-color: #ff7b4e;
+}
+
+
+.combo-box {
+    -fx-background-color:
+            aqua,
+            linear-gradient(#abddf0 50%, white 100%),
+            radial-gradient(center 50% -40%, radius 200%, #cefff3 45%, rgba(230,230,230,0) 50%);
+    -fx-background-radius: 3;
+}
+
+.combo-box:hover{
+    -fx-border-radius: 3;
+    -fx-border-color: aqua;
+}
+
+.combo-box:pressed {
+    -fx-background-color: #abddf0;
+}
+
+.text-field {
+    -fx-background-radius: 10;
 }
