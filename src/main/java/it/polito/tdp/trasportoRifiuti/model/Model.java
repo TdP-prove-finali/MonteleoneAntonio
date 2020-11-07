@@ -1,6 +1,7 @@
 package it.polito.tdp.trasportoRifiuti.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -69,10 +70,13 @@ public class Model {
     		this.mezzi.add(mezzo);
     		count++;
     	}
+    	
+    	Collections.sort(this.mezzi);
+    	
 	}
 
 	public List<MezzoDiTrasporto> getMezzi() {
-		return mezzi;
+		return this.mezzi;
 	}
 	
 	public void cancellaMezziDiTrasporto(String trasportatore) {
